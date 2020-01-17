@@ -16,9 +16,9 @@ config = {
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
 
-@app.route('/overhead', methods=['GET'])
-def overhead():
-  return storage.child("01_15_2020_cal.bmp").get_url(None)
+@app.route('/get_file/<filename>', methods=['GET'])
+def get_file(filename):
+  return storage.child(filename).get_url(None)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
