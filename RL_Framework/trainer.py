@@ -80,6 +80,8 @@ class Trainer(object):
                                )
 
         self._device = torch.device(self._device)
+        # UNCOMMENT TO USE MULTIPLE GPUs
+        # self._net = torch.nn.DataParallel(self._net, device_ids=[0, 1, 2, 3])
         self._net = self._net.to(self._device)
 
         self._optimizer = optim.Adadelta(self._net.parameters(),
