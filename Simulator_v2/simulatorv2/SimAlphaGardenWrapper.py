@@ -253,7 +253,8 @@ class SimAlphaGardenWrapper(WrapperEnv):
     def reset(self):
         self.garden = \
             Garden(
-                plants=self.PlantType.get_random_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
+                # plants=self.PlantType.get_random_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
+                plants=self.PlantType.get_same_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
                 N=self.rows,
                 M=self.cols,
                 sector_rows=self.sector_rows,
