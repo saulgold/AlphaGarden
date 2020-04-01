@@ -150,7 +150,7 @@ if __name__ == '__main__':
         if args.policy == 'b':
             evaluate_baseline_policy(env, baseline_policy.policy, collection_time_steps, sector_rows, sector_cols,
                                      prune_window_rows, prune_window_cols, garden_step, water_threshold,
-                                     sector_obs_per_day, trial)
+                                     sector_obs_per_day, trial, save_dir='baseline_policy_data' + str(args.seed) + '/')
         elif args.policy == 'n':
             evaluate_naive_policy(env, garden_days, sector_obs_per_day, trial, naive_water_freq)
         else:
