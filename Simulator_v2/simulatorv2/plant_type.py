@@ -99,7 +99,7 @@ class PlantType:
         checksum = 0
         for plant_type in self.plant_types:
             name, plant = plant_type
-            for _ in curr_num:
+            for _ in range(curr_num):
                 coord = coords.pop(0)
                 r, c = coord[0], coord[1]
                 plants.extend([Plant(r, c, c1=plant['c1'], growth_time=plant['growth_time'],
