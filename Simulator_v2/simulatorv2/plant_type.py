@@ -68,8 +68,9 @@ class PlantType:
         
         coords = [(r, c) for c in range(cols) for r in range(rows)]
         np.random.shuffle(coords)
+        idx = np.random.randint(0, self.num_plant_types)
         for i in range(NUM_PLANTS):
-            name, plant = self.plant_types[0]
+            name, plant = self.plant_types[idx]
             coord = coords.pop(0)
             r, c = coord[0], coord[1]
             plants.extend([Plant(r, c, c1=plant['c1'], growth_time=plant['growth_time'],
