@@ -100,6 +100,9 @@ def save_data(metrics, trial, save_dir):
         os.makedirs(dirname)
     with open(save_dir + 'data_' + str(trial) + '.pkl', 'wb') as f:
         pickle.dump(metrics, f)
+        # water usage, coverage, diversity, actions
+        # for the code that he used to compute these #s
+
     coverage, diversity, water_use, actions = metrics
     fig, ax = plt.subplots()
     plt.plot(coverage, label='coverage')
@@ -140,6 +143,7 @@ if __name__ == '__main__':
     water_threshold = 0.6
     naive_water_freq = 2
     
+    # want this to be 20
     for i in range(args.tests):
         trial = i + 1
         seed = args.seed + i
