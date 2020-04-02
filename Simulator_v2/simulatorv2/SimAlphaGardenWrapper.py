@@ -255,7 +255,8 @@ class SimAlphaGardenWrapper(WrapperEnv):
             Garden(
                 # plants=self.PlantType.get_random_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
                 # plants=self.PlantType.get_same_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
-                plants=self.PlantType.get_diff_num_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
+                # plants=self.PlantType.get_diff_num_plants(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
+                plants=self.PlantType.get_plants_with_invasive_species(self.seed, self.rows, self.cols, self.sector_rows, self.sector_cols),
                 N=self.rows,
                 M=self.cols,
                 sector_rows=self.sector_rows,

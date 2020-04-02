@@ -116,7 +116,7 @@ class PlantType:
         self.non_plant_centers = [c for c in coords if in_bounds(c[0], c[1])]
         return plants
 
-    def get_same_plants_with_invasive_species(self, seed, rows, cols, sector_rows, sector_cols):
+    def get_plants_with_invasive_species(self, seed, rows, cols, sector_rows, sector_cols):
         self.plant_in_bounds = 0
         self.plant_centers = []
         self.non_plant_centers = []
