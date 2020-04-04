@@ -121,9 +121,9 @@ def evaluate_fixed_policy(env, garden_days, sector_obs_per_day, trial, freq, pru
 
         print("Day {}/{}".format(i, garden_days))
         for _ in range(sector_obs_per_day):
-            prune = 2 if env.get_prune_window_greatest_width() > prune_thresh and i % 3 == 0 else 0
+            # prune = 2 if env.get_prune_window_greatest_width() > prune_thresh and i % 3 == 0 else 0
             # prune = 2 if np.random.random() < 0.01 and i % 3 == 0 else 0
-            # prune = 2 if np.random.random() < 0.01 else 0
+            prune = 2 if np.random.random() < 0.01 else 0
 
             env.step(water + prune)
     metrics = env.get_metrics()
