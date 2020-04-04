@@ -12,4 +12,3 @@ gym_simalphagarden/wrapperenv/__pycache__/
 nets/
 net_policy_data/
 naive_policy_data/
-baseline_policy_data/
