@@ -24,6 +24,7 @@ parser.add_argument('-p', '--policy', type=str, default='b', help='[b|n|l|i] bas
 parser.add_argument('--multi', action='store_true', help='Enable multiprocessing.')
 parser.add_argument('-l', '--threshold', type=float, default=1.0)
 parser.add_argument('-d', '--days', type=int, default=100)
+parser.add_argument('-f', '--pfrequency', type=int, default=3)
 args = parser.parse_args()
 
 
@@ -114,16 +115,16 @@ def evaluate_baseline_policy_serial(env, policy, collection_time_steps, sector_r
     metrics = env.get_metrics()
     save_data(metrics, trial, save_dir)
 
-def evaluate_fixed_policy(env, garden_days, sector_obs_per_day, trial, freq, prune_thresh, save_dir='fixed_policy_data/'):
+def evaluate_fixed_policy(env, garden_days, sector_obs_per_day, trial, freq, prune_thresh, prune_freq, save_dir='fixed_policy_data/'):
     env.reset()
     for i in range(garden_days):
         water = 1 if i % freq == 0 else 0
 
         print("Day {}/{}".format(i, garden_days))
         for _ in range(sector_obs_per_day):
-            # prune = 2 if env.get_prune_window_greatest_width() > prune_thresh and i % 3 == 0 else 0
+            prune = 2 if env.get_prune_window_greatest_width() > prune_thresh and i % prune_freq == 0 else 0
             # prune = 2 if np.random.random() < 0.01 and i % 3 == 0 else 0
-            prune = 2 if np.random.random() < 0.01 else 0
+            # prune = 2 if np.random.random() < 0.01 else 0
 
             env.step(water + prune)
     metrics = env.get_metrics()
@@ -227,6 +228,7 @@ if __name__ == '__main__':
     water_threshold = 0.6
     naive_water_freq = 2
     naive_prune_threshold = args.threshold
+    naive_prune_freq = args.pfrequency
     
     for i in range(args.tests):
         trial = i + 1
@@ -247,7 +249,16 @@ if __name__ == '__main__':
                                         prune_window_rows, prune_window_cols, garden_step, water_threshold,
                                         sector_obs_per_day, trial) 
         elif args.policy == 'n':
-            evaluate_fixed_policy(env, garden_days, sector_obs_per_day, trial, naive_water_freq, naive_prune_threshold, save_dir='fixed_policy_data_thresh_' + str(args.threshold) + '/')
+            evaluate_fixed_policy(
+                env,
+                garden_days,
+                sector_obs_per_day,
+                trial,
+                naive_water_freq,
+                naive_prune_threshold,
+                naive_prune_freq,
+                save_dir='fixed_policy_freq_' + str(args.pfrequency) + '_thresh_' + str(args.threshold) + '/'
+            )
         elif args.policy == 'i':
             evaluate_irrigation_no_pruning_policy(env, garden_days, sector_obs_per_day, trial, naive_water_freq)
         elif args.policy == 'c':
