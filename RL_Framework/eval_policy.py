@@ -275,7 +275,7 @@ if __name__ == '__main__':
                 naive_water_freq,
                 naive_prune_threshold,
                 naive_prune_freq,
-                save_dir= str(args.seed) + 'fixed_policy_freq_' + str(args.pfrequency) + '_thresh_' + str(args.threshold) + '/'
+                save_dir= str(args.seed) + 'ifixed_policy_freq_' + str(args.pfrequency) + '_thresh_' + str(args.threshold) + '/'
             )
         elif args.policy == 'i':
             evaluate_irrigation_no_pruning_policy(env, garden_days, sector_obs_per_day, trial, naive_water_freq)
