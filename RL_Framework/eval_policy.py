@@ -114,6 +114,16 @@ def evaluate_baseline_policy_serial(env, policy, collection_time_steps, sector_r
         obs, rewards, _, _ = env.step(action)
     metrics = env.get_metrics()
     save_data(metrics, trial, save_dir)
+def evaluate_no_pruning_policy(env, garden_days, sector_obs_per_day, trial, freq, save_dir='no_prune_policy_data/'):
+    env.reset()
+    for i in range(garden_days):
+        water = 1 if i % freq == 0 else 0
+
+        print("Day {}/{}".format(i, garden_days))
+        for _ in range(sector_obs_per_day):
+            env.step(water)
+    metrics = env.get_metrics()
+    save_data(metrics, trial, save_dir)
 
 def evaluate_fixed_policy(env, garden_days, sector_obs_per_day, trial, freq, prune_thresh, prune_freq, save_dir='fixed_policy_data/'):
     env.reset()
@@ -248,6 +258,14 @@ if __name__ == '__main__':
                 evaluate_baseline_policy_serial(env, baseline_policy.policy, collection_time_steps, sector_rows, sector_cols,
                                         prune_window_rows, prune_window_cols, garden_step, water_threshold,
                                         sector_obs_per_day, trial) 
+        elif args.policy == 'o':
+            evaluate_no_pruning_policy(
+                env,
+                garden_days,
+                sector_obs_per_day,
+                trial,
+                naive_water_freq
+            )
         elif args.policy == 'n':
             evaluate_fixed_policy(
                 env,
