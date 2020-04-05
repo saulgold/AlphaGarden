@@ -298,7 +298,8 @@ if __name__ == '__main__':
                 garden_days,
                 sector_obs_per_day,
                 trial,
-                naive_water_freq
+                naive_water_freq,
+                save_dir=str(args.seed) + "no_prune/"
             )
         elif args.policy == 'n':
             evaluate_fixed_policy(
