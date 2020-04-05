@@ -291,7 +291,7 @@ if __name__ == '__main__':
             else:
                 evaluate_baseline_policy_serial(env, baseline_policy.policy, collection_time_steps, sector_rows, sector_cols,
                                         prune_window_rows, prune_window_cols, garden_step, water_threshold,
-                                        sector_obs_per_day, trial) 
+                                        sector_obs_per_day, trial, save_dir=str(args.seed) + "baseline/") 
         elif args.policy == 'o':
             evaluate_no_pruning_policy(
                 env,
