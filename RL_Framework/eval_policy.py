@@ -16,15 +16,15 @@ import os
 import multiprocessing as mp
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-t', '--tests', type=int, default=1)
+parser.add_argument('-t', '--tests', type=int, default=20)
 parser.add_argument('-n', '--net', type=str, default='/')
 parser.add_argument('-m', '--moments', type=str, default='/')
 parser.add_argument('-s', '--seed', type=int, default=0)
 parser.add_argument('-p', '--policy', type=str, default='b', help='[b|n|l|i] baseline [b], naive baseline [n], learned [l], irrigation [i]')
 parser.add_argument('--multi', action='store_true', help='Enable multiprocessing.')
-parser.add_argument('-l', '--threshold', type=float, default=1.0)
+parser.add_argument('-l', '--threshold', type=float, default=10.0)
 parser.add_argument('-d', '--days', type=int, default=100)
-parser.add_argument('-f', '--pfrequency', type=int, default=3)
+parser.add_argument('-f', '--pfrequency', type=int, default=5)
 args = parser.parse_args()
 
 
